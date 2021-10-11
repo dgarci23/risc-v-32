@@ -1,0 +1,23 @@
+module forwarding_unit
+	
+	#(parameter WIDTH = 32)
+	
+	(
+		// Control Signals that signal if instruction could require forwarding
+		input 			[2:0]			ID.FwdRisk,
+		input 			[2:0]			EX.FwdRisk,
+		input 			[2:0]			MEM.FwdRisk,
+		input 			[2:0]			WB.FwdRisk,
+		// Source Register
+		input				[4:0]			ID.rs1,
+		input				[4:0]			ID.rs2,
+		// Destination Register
+		input				[4:0]			EX.rd,
+		input				[4:0]			MEM.rd,
+		input				[4:0]			WB.rd,
+		// Output Forward Control Signals
+		output			[1:0]			FwdA,
+		output			[1:0]			FwdB
+	);
+	
+	

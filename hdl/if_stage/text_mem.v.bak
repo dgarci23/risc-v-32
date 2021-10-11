@@ -1,0 +1,10 @@
+module text_mem 
+	
+	#(parameter DEPTH = 8, parameter WIDTH = 256)
+	
+	(
+		input			[4*DEPTH-1:0]			addr,
+		output reg	[4*DEPTH-1:0]			out
+	);
+	
+	reg [

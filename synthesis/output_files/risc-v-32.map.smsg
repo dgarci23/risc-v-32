@@ -1,0 +1,1 @@
+Info (10281): Verilog HDL Declaration information at control.v(15): object "BRANCH" differs only in case from object "Branch" in the same scope File: C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v Line: 15

@@ -1,0 +1,16 @@
+module main 
+
+	#(parameter WIDTH = 32)
+	
+	(
+		input CLK
+	);
+	
+	
+	register PC (
+		.rst(),
+		.en(),
+		.clk(),
+		.d(),
+		.q()
+	);
