@@ -6,6 +6,7 @@ module main
 		input CLK,
 		input RST
 	);
+	
 
 	// Reset control
 	// wire RST;
