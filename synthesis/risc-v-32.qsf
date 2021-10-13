@@ -72,6 +72,7 @@ set_global_assignment -name VERILOG_FILE ../hdl/stalling_unit.v
 set_global_assignment -name VERILOG_FILE ../hdl/adder.v
 set_global_assignment -name VERILOG_FILE ../hdl/id_stage/control.v
 set_global_assignment -name VERILOG_FILE ../hdl/main.v
+set_global_assignment -name VERILOG_FILE ../hdl/branch_prediction_unit.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
