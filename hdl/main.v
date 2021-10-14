@@ -84,11 +84,10 @@ module main
 		.out(IF_instr)
 	);
 	
-	// ADDED SECTION FOR BRANCH PREDICTION
-	
-	wire [31:0] ID_jump_pc = (ID_PCSrc == 2'b10) ? indirect_pc : imm_pc;
+	// Dynamic Branch Prediction
 	
 	wire IF_Branch = (IF_instr[6:0] == 7'b1100011);
+	wire [31:0] IF_imm = {{20{IF_instr[31]}}, IF_instr[7], IF_instr[30:25], IF_instr[11:8], 1'b0};
 	
 	wire IF_prediction, ID_prediction;
 	
@@ -101,15 +100,23 @@ module main
 		.correction(ID_correction),
 		.prediction(IF_prediction)
 	);
-
-	wire [31:0] IF_imm = {{20{IF_instr[31]}}, IF_instr[7], IF_instr[30:25], IF_instr[11:8], 1'b0};
 	
-	wire [31:0] IF_prediction_pc = IF_prediction ? IF_pc + IF_imm : IF_pc + 32'd4;
-	
-	wire [31:0] ID_prediction_inverse_pc = ID_prediction ? ID_pc + 32'd4 : ID_pc + ID_imm;
-	
-	
-	assign pc_in = ID_Jump?ID_jump_pc:(ID_Branch?(ID_prediction!=ID_correction?ID_prediction_inverse_pc:(IF_Branch?IF_prediction_pc:IF_pc+32'd4)):(IF_Branch?IF_prediction_pc:IF_pc+32'd4));
+	pc_selector #(.WIDTH(32)) pc_selector (
+		.ID_Jump(ID_Jump),
+		.ID_Branch(ID_Branch),
+		.IF_Branch(IF_Branch),
+		.PCSrc(ID_PCSrc),
+		.ID_prediction(ID_prediction),
+		.ID_correction(ID_correction),
+		.IF_prediction(IF_prediction),
+		.ID_pc(ID_pc),
+		.ID_imm(ID_imm),
+		.IF_pc(IF_pc),
+		.IF_imm(IF_imm),
+		.imm_pc(imm_pc),
+		.indirect_pc(indirect_pc),
+		.pc_in(pc_in)
+	);
 	
 	
 	
@@ -233,7 +240,7 @@ module main
 		.rst(RST),
 		.en(1'b1), // THIS MIGHT CHANGE
 		.clk(CLK),
-		.d({EX_pc, EX_alu_out, alu_in2, EX_rd, EX_signals}),
+		.d({EX_pc, EX_alu_out, EX_alu_in2, EX_rd, EX_signals}),
 		.q({MEM_pc, MEM_alu_out, MEM_mem_in, MEM_rd, MEM_signals})
 	);
 

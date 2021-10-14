@@ -99,6 +99,24 @@ Jumps do not require checking any condition, the change in pc is always executed
 Changing the pc value has already been explained above. Besides doing that, you would also need to flush the IF/ID register that has the pc+4 instruction by making the reset signal high. This implementation of Branching is known as **Assume Branch Not Taken** since we will assume that the branch is not taken and continue executing the instructions sequentially. If the branch is taken (and this is evaluated in the ID stage), we just flush the IF instruction and get the proper instruction in the next cycle.
 
 ## Improving Branch Prediction: Dynamic Prediction
+Right now, the penalty for a taken branch is one clock cycle. Since the branch logic is present at the ID stage, if the branch is taken, the instruction in the IF stage needs to be discarded. To reduce the penalty even further, we will need to:
+- Anticipating that the instruction is a branch
+- Predicting if it will be taken or not
+- Predicting the target address
+
+### The Dynamic Prediction Unit
+The first step in moving towards dynamic branch prediction is deciding and designing the system. This design will consist of a Finite State Machine with 4 possible states, 1 input and 1 output. The input of the system will be the branch evaluation at the ID stage and the output will be the branch prediction for the IF stage. The states are as follows:
+- **Branch Not Taken** (NT): In this state, the FSM predicts a branch not taken. If the branch evaluation is False, it will move to SNT, if it is True, it will move to BT.
+- **Branch Taken** (BT): In this state, the FSM predicts a branch taken. If the branch evaluation is False, it will move to NT, if True, it will move to SBT.
+- **Strong Branch Not Taken** (SNT): In this state, the FSM predicts branch not taken. If the branch evaluation is False, it stays in SNT, if it is True, it moves to NT.
+- **Strong Branch Taken** (SBT): In this state, the FSM predicts branch taken. If the branch evaluation is False, it will move to BT, if it is True, it stays in SBT.
+
+### The new PC logic
+With branch prediction, the logic for the pc input must also change. We distinguis the following scenarios:
+- If **ID_Jump** is True, then we should change PC to have the jump target value.
+- If **ID_Branch** is True and the evaluation of the branch is different from the prediction, then we should change the PC to the inverse of the predicted PC value.
+- If **IF_Branch** is True, we should change the PC to the predicted value.
+- Else, the new value should be sequential.
 
 ## Some notes on Computer Architecture and RISC-V
 
@@ -124,15 +142,6 @@ Values **NOT** preserved:
 - **Temporary registers**: x5-x7, x28-x31.
 - **Argument/Result registers**: x10-x17.
 - **Stack below the stack pointer**.
-
-### On dynamic branch prediction
-Right now, the penalty for a taken branch is one clock cycle. Since the branch logic is present at the ID stage, if the branch is taken, the instruction in the IF stage needs to be discarded. To reduce the penalty even further, we will need to:
-- Anticipating that the instruction is a branch
-- Predicting if it will be taken or not
-- Predicting the target address
-
-Steps for dynamic prediction:
-- In every clock cycle, the PC gets updated with +4 or the branch value depending
 
 ### On the cache
 
