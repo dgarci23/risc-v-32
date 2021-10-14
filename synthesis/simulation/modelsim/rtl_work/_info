@@ -10,7 +10,7 @@ z2
 cModel Technology
 Z0 dC:/Users/david/Desktop/Logic Design Projects/risc-v-32/synthesis/simulation/modelsim
 vadder
-Z1 !s110 1633912867
+Z1 !s110 1634154485
 !i10b 1
 !s100 Sbg;@ED9;5:5]HVOL8;^O0
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -20,13 +20,13 @@ R0
 w1633481252
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v
-!i122 11
+!i122 12
 Z4 L0 1 13
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1633912867.000000
+Z6 !s108 1634154485.000000
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v|
 !i113 1
@@ -34,7 +34,7 @@ Z7 o-vlog01compat -work work
 Z8 !s92 -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl}
 Z9 tCvgOpt 0
 valu
-!s110 1633912864
+Z10 !s110 1634154484
 !i10b 1
 !s100 m?6]lgGREo_dL]YWohfQg3
 R2
@@ -50,15 +50,39 @@ R5
 r1
 !s85 0
 31
-!s108 1633912864.000000
+Z11 !s108 1634154484.000000
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage/alu.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage/alu.v|
 !i113 1
 R7
 !s92 -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage}
 R9
+vbranch_prediction_unit
+Z12 !s110 1634154486
+!i10b 1
+!s100 1]k^fDV;;nDhNIL>:Tj]j1
+R2
+I>@dhX<]82N_`Pm@UBUnTX3
+R3
+R0
+w1634082469
+8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v
+FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v
+!i122 15
+L0 1 60
+R5
+r1
+!s85 0
+31
+Z13 !s108 1634154486.000000
+!s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v|
+!i113 1
+R7
+R8
+R9
 vcomparison_unit
-Z10 !s110 1633912866
+R1
 !i10b 1
 !s100 g@JXGznIb4U=mFg<NGmc?2
 R2
@@ -74,25 +98,25 @@ R5
 r1
 !s85 0
 31
-Z11 !s108 1633912866.000000
+R6
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/comparison_unit.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/comparison_unit.v|
 !i113 1
 R7
-Z12 !s92 -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage}
+Z14 !s92 -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage}
 R9
 vcontrol
 R1
 !i10b 1
-!s100 9FNzZoc?OU^S3LTdZ1caz1
+!s100 <EGK:l[T6J@mSad9??ez03
 R2
-IH13;b@6Z`jcEPAZ7BLcN_3
+InNZ>NMoZ]fG1OVQio=0MO2
 R3
 R0
-w1633805824
+w1633980107
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v
-!i122 12
+!i122 13
 L0 1 72
 R5
 r1
@@ -103,10 +127,10 @@ R6
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v|
 !i113 1
 R7
-R12
+R14
 R9
 vdata_mem
-R10
+R1
 !i10b 1
 !s100 A[@A:]kcQ068eX@G3aakK0
 R2
@@ -122,7 +146,7 @@ R5
 r1
 !s85 0
 31
-R11
+R6
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage/data_mem.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage/data_mem.v|
 !i113 1
@@ -130,7 +154,7 @@ R7
 !s92 -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage}
 R9
 vflush_unit
-R10
+R1
 !i10b 1
 !s100 zS;mG=;TlIlXKfl]?14:]2
 R2
@@ -140,13 +164,13 @@ R0
 w1633565704
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v
-!i122 8
+!i122 9
 R4
 R5
 r1
 !s85 0
 31
-R11
+R6
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v|
 !i113 1
@@ -156,21 +180,21 @@ R9
 vforwarding_unit
 R1
 !i10b 1
-!s100 AJ3PBX7oKzeFYNn2?A[DB1
+!s100 ]koJkQA0;S6dLo[0=B^2`1
 R2
-I^[A6Y^8YiEj2f<7Z45d3g3
+I9f>U]>]7e=3SRGf^;YB:b1
 R3
 R0
-w1633477957
+w1633980762
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v
-!i122 9
-Z13 L0 1 35
+!i122 10
+Z15 L0 1 35
 R5
 r1
 !s85 0
 31
-R11
+R6
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v|
 !i113 1
@@ -178,7 +202,7 @@ R7
 R8
 R9
 vImmGen
-R10
+R1
 !i10b 1
 !s100 41Kd1cRLN=5[1nji[O>6A0
 R2
@@ -189,37 +213,37 @@ w1633395065
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v
 !i122 5
-R13
-R5
-r1
-!s85 0
-31
-R11
-!s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v|
-!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v|
-!i113 1
-R7
-R12
-R9
-n@imm@gen
-vmain
-Z14 !s110 1633912868
-!i10b 1
-!s100 Az<b^2[2nJCDKX=YjXSUJ2
-R2
-I3<@YSdR:Kl`@@ALI8d5g63
-R3
-R0
-w1633812510
-8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v
-FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v
-!i122 13
-L0 1 279
+R15
 R5
 r1
 !s85 0
 31
 R6
+!s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v|
+!i113 1
+R7
+R14
+R9
+n@imm@gen
+vmain
+R12
+!i10b 1
+!s100 1E1Vf3:7R:K]8EV<G9iE]2
+R2
+IdIQkaChVF>MhT4XKd02Xe0
+R3
+R0
+w1634153752
+8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v
+FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v
+!i122 14
+L0 1 298
+R5
+r1
+!s85 0
+31
+R13
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v|
 !i113 1
@@ -228,31 +252,31 @@ R8
 R9
 vmain_tb
 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-!s110 1633912889
+!s110 1634154500
 !i10b 1
-!s100 n?F@]cUVXL98Nk`SiGVf63
+!s100 MB1OBk3DfbMKm2WY1^Qm`1
 R2
-IhI>b0@lQnN5MXUcC5Kz]U2
+IBn1D^<:Emb>bJPkVblhA13
 R3
 S1
 R0
-w1633912293
+w1634154049
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv
-!i122 15
-Z15 L0 1 22
+!i122 16
+L0 1 28
 R5
 r1
 !s85 0
 31
-!s108 1633912888.000000
+!s108 1634154500.000000
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv|
 !i113 1
 o-work work
 R9
 vmux2_1
-Z16 !s110 1633912865
+R10
 !i10b 1
 !s100 PJ4K8d@Yi2h3gGzdiEe6i1
 R2
@@ -268,7 +292,7 @@ R5
 r1
 !s85 0
 31
-Z17 !s108 1633912865.000000
+R11
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux2_1.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux2_1.v|
 !i113 1
@@ -292,7 +316,7 @@ R5
 r1
 !s85 0
 31
-R17
+R11
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux4_1.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux4_1.v|
 !i113 1
@@ -300,7 +324,7 @@ R7
 R8
 R9
 vregister
-R16
+R10
 !i10b 1
 !s100 ]UB<B4NGg_]8Uj@N5z>J@0
 R2
@@ -311,12 +335,12 @@ w1633382153
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v
 !i122 2
-R15
+L0 1 22
 R5
 r1
 !s85 0
 31
-R17
+R11
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v|
 !i113 1
@@ -324,7 +348,7 @@ R7
 R8
 R9
 vregister_file
-R16
+R10
 !i10b 1
 !s100 9@8OAf=okMaY7VH8YaG^Z0
 R2
@@ -340,12 +364,12 @@ R5
 r1
 !s85 0
 31
-R17
+R11
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/register_file.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/register_file.v|
 !i113 1
 R7
-R12
+R14
 R9
 vstalling_unit
 R1
@@ -358,7 +382,7 @@ R0
 w1633811677
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/stalling_unit.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/stalling_unit.v
-!i122 10
+!i122 11
 R4
 R5
 r1
@@ -372,23 +396,23 @@ R7
 R8
 R9
 vtext_mem
-R14
+!s110 1634154702
 !i10b 1
-!s100 i6YgZ@ie=UNX>j1oBT<Hj3
+!s100 =NIT6Oe]8HV@518P@o7U71
 R2
-I^?7N7ni2hli39Q^;[R@eU1
+I0bjl4QBklURJLOQ^]e=1K2
 R3
 R0
-w1633912809
+w1634154581
 8C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v
 FC:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v
-!i122 14
+!i122 20
 L0 1 16
 R5
 r1
 !s85 0
 31
-!s108 1633912868.000000
+!s108 1634154701.000000
 !s107 C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage|C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v|
 !i113 1

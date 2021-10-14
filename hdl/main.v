@@ -65,16 +65,6 @@ module main
 
 	// --------------------------------------- IF Stage ------------------------------------------------
 
-
-	mux4_1 #(.DEPTH(WIDTH)) pc_mux (
-		.in0(sequential_pc),
-		.in1(imm_pc),
-		.in2(indirect_pc),
-		.in3(sequential_pc),
-		.sel((ID_Jump|(ID_Branch&ID_CompFlag)) ? ID_PCSrc : 2'b0),
-		.out(pc_in)
-	);
-
 	register PC (
 		.rst(RST),
 		.en(~(MemStall)), // Updates except when there is a Memory Stall
@@ -93,14 +83,50 @@ module main
 		.addr(IF_pc),
 		.out(IF_instr)
 	);
-
-	// IF/ID Register
-	register #(.BUS_WIDTH(2*32)) IF_ID_register (
-		.rst((ID_Branch&ID_CompFlag)|RST|ID_Jump), // Resets when there is a Branching, and the instructions in the IF/ID register must be thrown out
+	
+	// Dynamic Branch Prediction
+	
+	wire IF_Branch = (IF_instr[6:0] == 7'b1100011);
+	wire [31:0] IF_imm = {{20{IF_instr[31]}}, IF_instr[7], IF_instr[30:25], IF_instr[11:8], 1'b0};
+	
+	wire IF_prediction, ID_prediction;
+	
+	wire ID_correction = ID_Branch&ID_CompFlag;
+	
+	branch_prediction_unit branch_prediction_unit (
+		.clk(~CLK),
+		.rst(RST),
+		.en(ID_Branch),
+		.correction(ID_correction),
+		.prediction(IF_prediction)
+	);
+	
+	pc_selector #(.WIDTH(32)) pc_selector (
+		.ID_Jump(ID_Jump),
+		.ID_Branch(ID_Branch),
+		.IF_Branch(IF_Branch),
+		.PCSrc(ID_PCSrc),
+		.ID_prediction(ID_prediction),
+		.ID_correction(ID_correction),
+		.IF_prediction(IF_prediction),
+		.ID_pc(ID_pc),
+		.ID_imm(ID_imm),
+		.IF_pc(IF_pc),
+		.IF_imm(IF_imm),
+		.imm_pc(imm_pc),
+		.indirect_pc(indirect_pc),
+		.pc_in(pc_in)
+	);
+	
+	
+	
+	// IF/ID Register 
+	register #(.BUS_WIDTH(2*32+1)) IF_ID_register (
+		.rst(((ID_correction!=ID_prediction)&ID_Branch)|RST|ID_Jump), // Resets when there is a Branching, and the instructions in the IF/ID register must be thrown out
 		.en(~(MemStall)), // Since PC is one instruction ahead of the stalled one, we also need to freeze this reg
 		.clk(CLK),
-		.d({IF_instr, IF_pc}),
-		.q({ID_instr, ID_pc})
+		.d({IF_instr, IF_pc, IF_prediction}),
+		.q({ID_instr, ID_pc, ID_prediction})
 	);
 
 	// -------------------------------------------- ID Stage -------------------------------------------------
@@ -214,7 +240,7 @@ module main
 		.rst(RST),
 		.en(1'b1), // THIS MIGHT CHANGE
 		.clk(CLK),
-		.d({EX_pc, EX_alu_out, alu_in2, EX_rd, EX_signals}),
+		.d({EX_pc, EX_alu_out, EX_alu_in2, EX_rd, EX_signals}),
 		.q({MEM_pc, MEM_alu_out, MEM_mem_in, MEM_rd, MEM_signals})
 	);
 
