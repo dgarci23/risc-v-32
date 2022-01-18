@@ -1,0 +1,10 @@
+nops
+addi 1, 0, 1
+addi 2, 0, 1
+addi 4, 0, 21
+or 3, 0, 2
+add 2, 1, 2
+or 0x1, 0x3, 0
+bge 4, 2, -6
+sw 0, 2, 0
+lw 6, 0, 0

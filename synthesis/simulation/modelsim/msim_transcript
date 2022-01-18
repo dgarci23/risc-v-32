@@ -1,0 +1,494 @@
+# Reading pref.tcl
+# do risc-v-32_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/ex_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage/alu.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:04 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/ex_stage/alu.v 
+# -- Compiling module alu
+# 
+# Top level modules:
+# 	alu
+# End time: 15:48:04 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/id_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/register_file.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:04 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/register_file.v 
+# -- Compiling module register_file
+# 
+# Top level modules:
+# 	register_file
+# End time: 15:48:04 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:04 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/register.v 
+# -- Compiling module register
+# 
+# Top level modules:
+# 	register
+# End time: 15:48:04 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux2_1.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:04 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux2_1.v 
+# -- Compiling module mux2_1
+# 
+# Top level modules:
+# 	mux2_1
+# End time: 15:48:04 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux4_1.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:04 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mux4_1.v 
+# -- Compiling module mux4_1
+# 
+# Top level modules:
+# 	mux4_1
+# End time: 15:48:04 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/id_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/ImmGen.v 
+# -- Compiling module ImmGen
+# 
+# Top level modules:
+# 	ImmGen
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/id_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/comparison_unit.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/comparison_unit.v 
+# -- Compiling module comparison_unit
+# 
+# Top level modules:
+# 	comparison_unit
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/mem_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage/data_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/mem_stage/data_mem.v 
+# -- Compiling module data_mem
+# 
+# Top level modules:
+# 	data_mem
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/if_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v 
+# -- Compiling module text_mem
+# 
+# Top level modules:
+# 	text_mem
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/flush_unit.v 
+# -- Compiling module flush_unit
+# 
+# Top level modules:
+# 	flush_unit
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/forwarding_unit.v 
+# -- Compiling module forwarding_unit
+# 
+# Top level modules:
+# 	forwarding_unit
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/stalling_unit.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/stalling_unit.v 
+# -- Compiling module stalling_unit
+# 
+# Top level modules:
+# 	stalling_unit
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/adder.v 
+# -- Compiling module adder
+# 
+# Top level modules:
+# 	adder
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl/id_stage {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:05 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/id_stage/control.v 
+# -- Compiling module control
+# 
+# Top level modules:
+# 	control
+# End time: 15:48:05 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:06 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/main.v 
+# -- Compiling module main
+# 
+# Top level modules:
+# 	main
+# End time: 15:48:06 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/david/Desktop/Logic\ Design\ Projects/risc-v-32/hdl {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:06 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/branch_prediction_unit.v 
+# -- Compiling module branch_prediction_unit
+# 
+# Top level modules:
+# 	branch_prediction_unit
+# End time: 15:48:06 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vlog -reportprogress 300 -work work {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:48:20 on Oct 13,2021
+# vlog -reportprogress 300 -work work C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv 
+# -- Compiling module main_tb
+# 
+# Top level modules:
+# 	main_tb
+# End time: 15:48:20 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.main_tb
+# vsim work.main_tb 
+# Start time: 15:48:24 on Oct 13,2021
+# Loading sv_std.std
+# Loading work.main_tb
+# Loading work.main
+# Loading work.register
+# Loading work.adder
+# Loading work.text_mem
+# Loading work.branch_prediction_unit
+# Loading work.register_file
+# Loading work.ImmGen
+# Loading work.mux4_1
+# Loading work.comparison_unit
+# Loading work.control
+# Loading work.flush_unit
+# Loading work.alu
+# Loading work.data_mem
+# Loading work.mux2_1
+# Loading work.forwarding_unit
+# Loading work.stalling_unit
+mem load -filltype value -filldata 000000000000000000 -fillradix symbolic /main_tb/uut/data_mem/data1(255)
+# (vsim-3862) Too many digits in data '000000000000000000'.
+mem load -filltype value -filldata 0000000 -fillradix symbolic /main_tb/uut/data_mem/data1(255)
+vlog -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage} {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:49:50 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v 
+# -- Compiling module text_mem
+# 
+# Top level modules:
+# 	text_mem
+# End time: 15:49:50 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.main_tb
+# End time: 15:49:57 on Oct 13,2021, Elapsed time: 0:01:33
+# Errors: 0, Warnings: 0
+# vsim work.main_tb 
+# Start time: 15:49:57 on Oct 13,2021
+# Loading sv_std.std
+# Loading work.main_tb
+# Loading work.main
+# Loading work.register
+# Loading work.adder
+# Loading work.text_mem
+# Loading work.branch_prediction_unit
+# Loading work.register_file
+# Loading work.ImmGen
+# Loading work.mux4_1
+# Loading work.comparison_unit
+# Loading work.control
+# Loading work.flush_unit
+# Loading work.alu
+# Loading work.data_mem
+# Loading work.mux2_1
+# Loading work.forwarding_unit
+# Loading work.stalling_unit
+vlog -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage} {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:50:10 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v 
+# -- Compiling module text_mem
+# 
+# Top level modules:
+# 	text_mem
+# End time: 15:50:10 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.main_tb
+# End time: 15:50:16 on Oct 13,2021, Elapsed time: 0:00:19
+# Errors: 0, Warnings: 0
+# vsim work.main_tb 
+# Start time: 15:50:16 on Oct 13,2021
+# Loading sv_std.std
+# Loading work.main_tb
+# Loading work.main
+# Loading work.register
+# Loading work.adder
+# Loading work.text_mem
+# Loading work.branch_prediction_unit
+# Loading work.register_file
+# Loading work.ImmGen
+# Loading work.mux4_1
+# Loading work.comparison_unit
+# Loading work.control
+# Loading work.flush_unit
+# Loading work.alu
+# Loading work.data_mem
+# Loading work.mux2_1
+# Loading work.forwarding_unit
+# Loading work.stalling_unit
+add wave -position end  sim:/main_tb/uut/IF_pc
+run
+# ** Warning: (vsim-7) Failed to open readmem file "text.mem" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v(12)
+#    Time: 0 ps  Iteration: 0  Instance: /main_tb/uut/text_mem
+#           0
+# next pc:          x
+# current pc:          4
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+# ** Note: $finish    : C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv(23)
+#    Time: 43 ps  Iteration: 0  Instance: /main_tb
+# 1
+# Break in Module main_tb at C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv line 23
+vlog -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage} {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:51:38 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v 
+# -- Compiling module text_mem
+# 
+# Top level modules:
+# 	text_mem
+# End time: 15:51:38 on Oct 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -vlog01compat -work work {+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage} {C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 15:51:41 on Oct 13,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage" C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v 
+# -- Compiling module text_mem
+# 
+# Top level modules:
+# 	text_mem
+# End time: 15:51:42 on Oct 13,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim work.main_tb
+# End time: 15:51:47 on Oct 13,2021, Elapsed time: 0:01:31
+# Errors: 0, Warnings: 1
+# vsim work.main_tb 
+# Start time: 15:51:47 on Oct 13,2021
+# Loading sv_std.std
+# Loading work.main_tb
+# Loading work.main
+# Loading work.register
+# Loading work.adder
+# Loading work.text_mem
+# Loading work.branch_prediction_unit
+# Loading work.register_file
+# Loading work.ImmGen
+# Loading work.mux4_1
+# Loading work.comparison_unit
+# Loading work.control
+# Loading work.flush_unit
+# Loading work.alu
+# Loading work.data_mem
+# Loading work.mux2_1
+# Loading work.forwarding_unit
+# Loading work.stalling_unit
+add wave -position end  sim:/main_tb/uut/IF_pc
+run
+# ** Warning: (vsim-7) Failed to open readmem file "text.mem" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/david/Desktop/Logic Design Projects/risc-v-32/hdl/if_stage/text_mem.v(12)
+#    Time: 0 ps  Iteration: 0  Instance: /main_tb/uut/text_mem
+#           0
+# next pc:          x
+# current pc:          4
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+#           0
+# next pc:          x
+# current pc:          x
+#  
+# ** Note: $finish    : C:/Users/david/Desktop/Logic Design Projects/risc-v-32/testbenches/main_tb.sv(23)
+#    Time: 43 ps  Iteration: 0  Instance: /main_tb
+# End time: 15:52:14 on Oct 13,2021, Elapsed time: 0:00:27
+# Errors: 0, Warnings: 1
