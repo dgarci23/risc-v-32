@@ -1,6 +1,8 @@
 # RISC-V in Verilog
 ### A Hardware Design Project by David Garcia Gonzalez.
 
+This project follows the concepts in Computer Architecture of the RISC-V ISA explained in the Patterson and Hennessy book. The project tries to create a pipelined processor that includes most of the concepts developed on the book. The synthesis is completely developed in Verilog, while SystemVerilog is used for the testbenches. The end result is a computing system with a processor and both data and instruction memory.
+
 # Pipelined Implementation: Assume Branch Not Taken
 
 ## First Steps: Pipeline Stages and Hardware
@@ -14,6 +16,7 @@ This RISC-V implementation consists of five pipeline stages, defined as follows:
 - **WB Stage**: in this stage we have the writeback value to the register file (if there is one)
 
 This stages are implemented in the order they appear above.
+
 
 ### PC
 The PC register (which contains the program counter, **pc**) has a length of 32 bits. Its enable and reset signals are going to be explained later since they are relevant for branches, jumps and data hazards. The input of the PC is fed by three possible inputs controlled by a signal (**PCSrc**) and selected using a mux. The three inputs are:
@@ -143,49 +146,3 @@ Values **NOT** preserved:
 - **Temporary registers**: x5-x7, x28-x31.
 - **Argument/Result registers**: x10-x17.
 - **Stack below the stack pointer**.
-
-### On the cache
-
-Direct mapped: assign location based on the address of the word in memory. (Block address) mod (Number of blocks in the cache). (Note: if the number of blocks is a power of two, you only need the lower log2(N) of the address, i.e. for 8 blocks - 3 lower bits)
-
-Tags: contain the address information required to identify the data in the cache. (The upper portion of the address)
-
-Also we need to check if the cache block contains valid information. A valid bit indicates whether an entry contains a valid address.
-
-### Cache: reading
-
-If data is aligned in memory. We can ignore the lower two bits, since those specify the specific byte of the entire 4 byte word.
-
-Tag field = 32 - (log(size) + m + 2 (for 2^(m+2) word per block size)
-
-The block size of the cache does not necessarily contain one word, it can contain more than that. (Principle of spatial locality)
-
-A large block size limits the amount of blocks, and increases the number of misses and gets bumped out of the cache quickly without allowing the system to take advantage of the stored blocks.
-
-#### About Miss penalties and dealing with them
-- Early restart: resume execution as soon as the requested word of the block is returned.
-- Critical word first: return the requested word first.
-
-#### Handling Cache Misses
-- Creates a pipeline stall.
-- If an instr access ends in a miss, the content of the instruction register is invalid.
-- Tell the lower level of the memory to perform a read.
-- Send the original PC value to memory
-- Perform a read and wait to complete access.
-- Write the cache entry.
-- Restart the instruction execution.
-
-### Handling writes
-
-#### Write through
-Write into the cache and memory to avoid inconsistency.
-
-#### Write buffer
-A write buffer stores the data while they are waiting to be written to memory. Processor only writes to cache and write buffer. The entry of the write buffer frees as soon as it is written to main memory. If the buffer is full, it should stall.
-
-#### Write back
-The value is only stored to memory when the value is replaced in the cache. MORE COMPLEX.
-
-### Fully associative and set associative
-(Block number) mod (Number of sets in the cache)
-Associativity of 2!!!
