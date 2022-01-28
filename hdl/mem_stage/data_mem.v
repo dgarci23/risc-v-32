@@ -1,7 +1,7 @@
 module data_mem
-	
+
 	#(parameter WIDTH = 256, parameter DEPTH = 8)
-	
+
 	(
 		input										clk,
 		input			[4*DEPTH - 1:0]		in,
@@ -11,18 +11,18 @@ module data_mem
 		input										MemWrite,
 		output reg	[4*DEPTH - 1:0]		out
 	);
-	
+
 	reg [DEPTH-1:0] data0 [WIDTH-1:0];
 	reg [DEPTH-1:0] data1 [WIDTH-1:0];
 	reg [DEPTH-1:0] data2 [WIDTH-1:0];
 	reg [DEPTH-1:0] data3 [WIDTH-1:0];
-	
+
 	integer i;
 	initial begin for (i = 0; i < WIDTH; i = i + 1) begin
 		data0[i] = i[7:0]*4;
-		data1[i] = i[7:0]*4+1; 
-		data2[i] = i[7:0]*4+2; 
-		data3[i] = i[7:0]*4+3; 
+		data1[i] = i[7:0]*4+1;
+		data2[i] = i[7:0]*4+2;
+		data3[i] = i[7:0]*4+3;
 		end
 	end
 
@@ -74,14 +74,14 @@ module data_mem
 					endcase
 				end
 				default: begin end
-				
+
 			endcase
 
-					
-				
-	
 
-	
+
+
+
+
 	always @(posedge clk)
 		if (MemWrite)
 			case (MemLen)
@@ -131,20 +131,20 @@ module data_mem
 							data2[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
 							data3[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
 							data0[addr[$clog2(WIDTH)-1:2]+1] <= in[23:16];
-							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];						
+							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];
 						end
 						3: begin
 							data3[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
 							data0[addr[$clog2(WIDTH)-1:2]+1] <= in[15:8];
 							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[23:16];
-							data2[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];						
+							data2[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];
 						end
 					endcase
 				end
-						
-						
-						
+
+
+
 			endcase
-	
-	
+
+
 endmodule
