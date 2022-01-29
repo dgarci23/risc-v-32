@@ -1,0 +1,11 @@
+*
+!.gitignore
+!*/
+!*.sv
+!*.xlsx
+!*.v
+!*.md
+!*.sh
+!*.txt
+!*.py
+
