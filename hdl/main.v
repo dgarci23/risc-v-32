@@ -19,6 +19,8 @@ module main
   wire [2:0] data_len;
   wire data_w_en, data_r_en;
 
+  wire [IO_DEPTH-1:0] io_data_out;
+
   processor #(.WIDTH(WIDTH)) processor (
     .CLK(CLOCK_50),
     .RST(~KEY[0]),
@@ -39,7 +41,7 @@ module main
     .MemLen(data_len),
     .MemRead(data_r_en),
     .MemWrite(data_w_en),
-    .CE(data_addr <= 256),
+    .CE(data_addr < 256),
     .out(data_r)
   );
 
@@ -48,6 +50,12 @@ module main
     .out(instr)
   );
 
-
+  io #(.IO_SIZE(IO_SIZE), .IO_DEPTH(IO_DEPTH)) io (
+	  .clk(CLOCK_50),
+	  .io_addr(1'b0),
+	  .io_data_in(data_w),
+	  .io_w_en(data_w_en&&(data_addr >= 256)),
+	  .io_data_out(io_data_out)
+  );
 
 endmodule

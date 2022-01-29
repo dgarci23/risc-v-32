@@ -17,7 +17,7 @@ module main_tb ();
       #2;
     end
     #50;
-    $display("PC: %d -- x15: %d", uut.processor.IF_pc, uut.processor.register_file.regs[15].register.q);
+    $display("PC: %d -- io: %d", uut.processor.IF_pc, uut.io_data_out);
     $finish;
   end
 
