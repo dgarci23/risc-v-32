@@ -99,7 +99,7 @@ def assemble(line):
         assembly = imm + ra + func3 + rd + opcode
     #  Store
     if (opcode == "0100011"):
-        ra, rb, imm = line.split(" ")[1:4]
+        rb, ra, imm = line.split(" ")[1:4]
         rb = getBinStr(rb, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)

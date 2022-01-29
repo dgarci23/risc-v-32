@@ -3,7 +3,6 @@
 
 This project follows the concepts in Computer Architecture of the RISC-V ISA explained in the Patterson and Hennessy book. The project tries to create a pipelined processor that includes most of the concepts developed on the book. The synthesis is completely developed in Verilog, while SystemVerilog is used for the testbenches. The end result is a computing system with a processor and both data and instruction memory.
 
-# Pipelined Implementation: Assume Branch Not Taken
 
 ## First Steps: Pipeline Stages and Hardware
 
@@ -64,7 +63,7 @@ There are more control signals that are determined outside of the scope of the c
 The ALU has two inputs, the first one can be either the pc value, 0 or the register value, and the second input can be either the immediate value, 4, or the immediate. The ALU supports the following operations: ADD, SUB, AND, XOR, OR, SLL (Shift Left Logical), SRL (Shift Right Logical), SRA (Shift Right Arithmetic), SLA (Set Less Than) and SLTU (Set Less Than Unsigned).
 
 ### Immediate Generator
-The immediate value used in instructions depends on the instruction type. Since it is not always encoded the same way in the instruction, we need a module that transforms the instruction into a 32-bit immediate signal.
+The immediate value used in instructions depends on the instruction type. Since it is not always encoded the same way in the instruction, we need a module that transforms the instruction into a 32-bit immediate signal. To better understand how the instruction matches a determined immediate value, check the RISC-V documentation on immediate encoding. The verilog model for this processor uses the last seven bits of the instruction to determine the immediate value.
 
 ### Data Memory
 The data memory contains the memory accessible by the user (data). It is broken into four sections, to be able to implement load and store instructions for bytes (8 bits), half-words (16 bits) and words (32 bits). Each memory section contains 8-bit memory locations. For a particular address i, the first one contains the lower 8 bits of the corresponding word, the second one the next 8 and so on. The control signal MemLen determines in which way is the memory accessed, either in bytes, words or halfwords:
@@ -124,9 +123,22 @@ We will change the design of the PC, eliminating the hardcoding of the mux in th
 
 ## Some notes on Computer Architecture and RISC-V
 
+### On writing assembly language
+The purpose of this section is to act as a quick reference guide for programming in the RISC-V assembly language. 
+- **Branches**: branches follow the syntax branch ra, rb, offset. Where the check ra (comparisson) rb is done, and if true, pc <- pc + 2(offset).
+- **JAL**: JAL syntax is jal rd, offset. Where rd <- pc and then pc <- pc + 2(offset).
+- **JALR**: JALR syntax is jalr rd, ra, offset. Where rd <- pc and then pc <- ra + offset.
+- **AUIPC**: syntax is auipc rd, offset. Where rd <- pc + high20b(offset). Where high20b() is the higher 20 bits.
+- **LUI**: the syntax is lui rd, offset. Where rd <- high20b(offset).
+- **Immediate**: the syntax is operation rd, ra, offset. Where rd <- ra operation offset.
+- **Arithmetic**: the syntax is operation rd, ra, rb. Where rd <- ra operation rb.
+- **Load**: the syntax is load rd, ra, offset. Where rd <- [ra + 2(offset)].
+- **Store**: the syntax is store rb, ra, offset. Where [rb + 2(offset)] <- ra.
+
+
 ### On memory hierarchy
 
-The memory is segmented the following way from top to bottom:
+The memory is segmented the following way rom top to bottom:
 - **Stack**: grows from top to bottom. The place in memory where the stack had its latest value is kept by the stack pointer (**sp**) on register x2. The stack grows by allocating data to memory and reducing the value of sp.
 - **Heap**: grows from bottom to top.
 - **Static**: used for constants and static variables.

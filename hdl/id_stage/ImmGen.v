@@ -13,7 +13,7 @@ module ImmGen
 			// I
 			7'b1100111: imm <= {{21{instr[31]}}, instr[30:20]};
 			// J
-			7'b1101111: imm <= {{10{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
+			7'b1101111: imm = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
 			// U
 			7'b0110111: imm <= {instr[31:12], 12'b0};
 			7'b0010111: imm <= {instr[31:12], 12'b0};

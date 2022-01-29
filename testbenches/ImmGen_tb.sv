@@ -10,7 +10,9 @@ module ImmGen_tb ();
   );
 
   initial begin
-    instr = 32'b0000_0000_0000_0000_0000_0000_0001_0011; #1;
+    instr = 32'b11111111111111111111000001101111; #3;
+    $display("%b: %d %d %d %d %d", imm,$bits({10{instr[31]}}), $bits(instr[19:12]), $bits(instr[20]), $bits(instr[30:21]), $bits(1'b0));
+
 
     $finish;
   end

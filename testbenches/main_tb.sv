@@ -14,9 +14,8 @@ module main_tb ();
   initial begin
     clk = 0; rst = 1; #2; rst = 0; #1;
     #50;
-    for (i = 0; i < 11; i++) begin
-      $display("%d", $signed(uut.processor.register_file.regs[6].register.q));
-      $display("current pc: %d", uut.processor.MEM_pc);
+    for (i = 0; i < 51; i++) begin
+      $display("Reg: %h", $signed(uut.processor.register_file.regs[5].register.q));
       #2;
     end
     $finish;
