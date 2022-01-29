@@ -9,6 +9,7 @@ module data_mem
 		input			[2:0]						MemLen,
 		input										MemRead,
 		input										MemWrite,
+		input										CE,
 		output reg	[4*DEPTH - 1:0]		out
 	);
 
@@ -27,7 +28,7 @@ module data_mem
 	end
 
 	always @(posedge clk)
-		if (MemRead)
+		if (MemRead&&CE)
 			case (MemLen)
 				0: begin
 					case (addr[1:0])
@@ -83,7 +84,7 @@ module data_mem
 
 
 	always @(posedge clk)
-		if (MemWrite)
+		if (MemWrite&&CE)
 			case (MemLen)
 				0: begin
 					case (addr[1:0])

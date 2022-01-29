@@ -39,6 +39,7 @@ module main
     .MemLen(data_len),
     .MemRead(data_r_en),
     .MemWrite(data_w_en),
+    .CE(data_addr <= 256),
     .out(data_r)
   );
 
