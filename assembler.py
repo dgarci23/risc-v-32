@@ -130,7 +130,7 @@ def getBinStr(x, l):
     return x
                       # return positive value as is
 
-code_f = open("code.txt", "r")
+code_f = open("program.s", "r")
 mem_f = open("hdl/if_stage/text.mem", "w")
 
 index = 64
