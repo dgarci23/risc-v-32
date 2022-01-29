@@ -13,11 +13,11 @@ module main_tb ();
 
   initial begin
     clk = 0; rst = 1; #2; rst = 0; #1;
-    #50;
     for (i = 0; i < 51; i++) begin
-      $display("Reg: %h", $signed(uut.processor.register_file.regs[5].register.q));
       #2;
     end
+    #50;
+    $display("PC: %d -- x15: %d", uut.processor.IF_pc, uut.processor.register_file.regs[15].register.q);
     $finish;
   end
 

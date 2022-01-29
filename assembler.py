@@ -103,7 +103,7 @@ def assemble(line):
         rb = getBinStr(rb, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)
-        assembly = imm[0:7] + rb + ra + func3 + imm[7:12] + opcode
+        assembly = imm[0:7] + ra + rb + func3 + imm[7:12] + opcode
 
 
     assembly = assembly[24:32] + " " + assembly[16:24] + " " + assembly[8:16] + " " + assembly[0:8]
