@@ -1,7 +1,0 @@
-
-State Machine - |main|branch_prediction_unit:branch_prediction_unit|state
-Name state.SBT state.BT state.NT state.00 
-state.00 0 0 0 0 
-state.NT 0 0 1 1 
-state.BT 0 1 0 1 
-state.SBT 1 0 0 1 
