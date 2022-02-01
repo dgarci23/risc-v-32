@@ -121,6 +121,12 @@ With branch prediction, the logic for the pc input must also change. We distingu
 - Else, the new value should be sequential.
 We will change the design of the PC, eliminating the hardcoding of the mux in the IF stage and working with a PC selector module that has the logic more fleshed out.
 
+## I/O
+
+### Simple I/O system
+We would want to have an io system to output results from our programs. We will design a simple io module that will expand the memory addresses to include an extra address for a 32 bit i/o location. First we will change the memory module, creating a chip enable signal that serves as an extra control signal on the reads and writes from memory. This chip enable signal will be a simple comparisson with theinput address to memory so we do not read memory when we are out of scope. Then we will create a simple io with a single memory location of 32 bits. The write enable signal will be the same signal from the processor to main memory. The address does not matter since we only have one address location. At this point we can write to an output port using the store instruction.
+
+
 ## Some notes on Computer Architecture and RISC-V
 
 ### On writing assembly language

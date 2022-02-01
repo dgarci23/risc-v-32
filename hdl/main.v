@@ -12,7 +12,8 @@ module main
 
   (
         input       CLOCK_50,
-        input [0:0] KEY
+        input [0:0] KEY,
+	input [6:0] HEX0
   );
 
   wire [WIDTH-1:0] instr_addr, instr, data_addr, data_w, data_r;
@@ -56,6 +57,11 @@ module main
 	  .io_data_in(data_w),
 	  .io_w_en(data_w_en&&(data_addr >= 256)),
 	  .io_data_out(io_data_out)
+  );
+
+  seven_segment seven_segment (
+	  .in(io_data_out[3:0]),
+	  .out(HEX0)
   );
 
 endmodule
