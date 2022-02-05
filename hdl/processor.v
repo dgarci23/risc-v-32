@@ -12,7 +12,7 @@ module processor
 		output [WIDTH-1:0] MEM_mem_in,
 		output [WIDTH-1:0] MEM_alu_out,
 		output  [2:0] 		 MEM_MemLen,
-		output 						 MEM_MemRead,
+		output 				 MEM_MemRead,
 		output 						 MEM_MemWrite,
 		input  [WIDTH-1:0] MEM_mem_out
 	);

@@ -13,7 +13,7 @@ module main
   (
         input       CLOCK_50,
         input [0:0] KEY,
-	input [6:0] HEX0
+	output [6:0] HEX0
   );
 
   wire [WIDTH-1:0] instr_addr, instr, data_addr, data_w, data_r;
