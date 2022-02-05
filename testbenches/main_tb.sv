@@ -15,6 +15,7 @@ module main_tb ();
     clk = 0; rst = 1; #2; rst = 0; #1;
     for (i = 0; i < 51; i++) begin
       #2;
+      $display("PC: %d", uut.processor.IF_pc);
     end
     #50;
     $display("PC: %d -- io: %d", uut.processor.IF_pc, uut.io_data_out);
