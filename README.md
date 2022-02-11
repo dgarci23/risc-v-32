@@ -3,6 +3,10 @@
 
 This project follows the concepts in Computer Architecture of the RISC-V ISA explained in the Patterson and Hennessy book. The project tries to create a pipelined processor that includes most of the concepts developed on the book. The synthesis is completely developed in Verilog, while SystemVerilog is used for the testbenches. The end result is a computing system with a processor and both data and instruction memory.
 
+Below is the project folder structure:
+
+![Project Structure](docs/project_structure.png)
+
 
 ## First Steps: Pipeline Stages and Hardware
 
@@ -23,6 +27,8 @@ The PC register (which contains the program counter, **pc**) has a length of 32 
 - **Immediate**: which is the current pc value, plus an immediate. This immediate is shifted one bit to the left. This corresponds to a PCSrc value of 01. (pc <- pc + 2(imm))
 - **Indirect**: which is the value of a register, plus an immediate. This corresponds to a PCSrc value of 10. (pc <- rs + imm)
 
+![PC Sources](docs/pc_sources.png)
+
 ### Instruction Memory
 For all memory, each address position represents a byte. A 32 bit signal consists of four memory locations either in text or data. The instruction memory (mem_text) is a ROM. It has an input address (which is the output of the PC) and it outputs the memory location at that address, and also the three next ones (to form a 32 bit signal).
 
@@ -32,6 +38,8 @@ This RISC-V implementation consists of 32 integer registers (x0 - x31) of 32 bit
 - **rd**: this is the destination register.
 - **RegWrite**: this enables writing the input value to a register rd.
 The register file outputs two 32-bit signals, corresponding to the values of register rs1 and rs2.
+
+![Register File](docs/reg_file.png)
 
 ### Comparison Unit
 In order to reduce the cost of branching, the decision to branch or not branch is taken at the ID stage (previous designs made this decision in the EX stage). This change makes necessary the evaluation of comparisons between registers in the ID stage and it means that the forwarding logic that was first designed for the EX stage needs to be moved to the ID stage. This does not change much of the structure of the forwarding unit, but this will be covered later in its own section. The comparison unit takes the outputs of the two forwarding mux and it compares them, generating a flag that tells the PC mux whether to branch or to continue sequentially. This operations are:
@@ -43,6 +51,8 @@ In order to reduce the cost of branching, the decision to branch or not branch i
 - Branch Greater Than Unsigned (101)
 
 For all these operations, it checks the value of rs1 and compares it to the value of rs2. The comparison flag takes the value of 0 if the condition is False and the value of 1 if the condition is True. The decision of which specific condition to output is determined by a 3 bit selector signal. (Verilog note: you can use `$signed()` to make verilog interpret something as a signed value.)
+
+![Comparison Unit](docs/comparison_unit.png)
 
 ### Control Unit
 The control unit gets three different sections of the instruction and it establishes the value of the control signals depending on the value of those sections. The sections are the opcode (bits 0 through 6), func3 (12 through 14) and func7 (25 through 31). The control signals that are determined are the following:
@@ -112,6 +122,8 @@ The first step in moving towards dynamic branch prediction is deciding and desig
 - **Branch Taken** (BT): In this state, the FSM predicts a branch taken. If the branch evaluation is False, it will move to NT, if True, it will move to SBT.
 - **Strong Branch Not Taken** (SNT): In this state, the FSM predicts branch not taken. If the branch evaluation is False, it stays in SNT, if it is True, it moves to NT.
 - **Strong Branch Taken** (SBT): In this state, the FSM predicts branch taken. If the branch evaluation is False, it will move to BT, if it is True, it stays in SBT.
+
+![Dynamic Prediction FSM diagram](docs/dp_fsm.png)
 
 ### The new PC logic
 With branch prediction, the logic for the pc input must also change. We distinguish the following scenarios:
