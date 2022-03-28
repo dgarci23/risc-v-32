@@ -124,13 +124,13 @@ We will change the design of the PC, eliminating the hardcoding of the mux in th
 ## I/O
 
 ### Simple I/O system
-We would want to have an io system to output results from our programs. We will design a simple io module that will expand the memory addresses to include an extra address for a 32 bit i/o location. First we will change the memory module, creating a chip enable signal that serves as an extra control signal on the reads and writes from memory. This chip enable signal will be a simple comparisson with theinput address to memory so we do not read memory when we are out of scope. Then we will create a simple io with a single memory location of 32 bits. The write enable signal will be the same signal from the processor to main memory. The address does not matter since we only have one address location. At this point we can write to an output port using the store instruction.
+We would want to have an io system to output results from our programs. We will design a simple io module that will expand the memory addresses to include an extra address for a 32 bit i/o location. First we will change the memory module, creating a chip enable signal that serves as an extra control signal on the reads and writes from memory. This chip enable signal will be a simple comparisson with the input address to memory so we do not read memory when we are out of scope. Then we will create a simple io with a single memory location of 32 bits. The write enable signal will be the same signal from the processor to main memory. The address does not matter since we only have one address location. At this point we can write to an output port using the store instruction.
 
 
 ## Some notes on Computer Architecture and RISC-V
 
 ### On writing assembly language
-The purpose of this section is to act as a quick reference guide for programming in the RISC-V assembly language. 
+The purpose of this section is to act as a quick reference guide for programming in the RISC-V assembly language.
 - **Branches**: branches follow the syntax branch ra, rb, offset. Where the check ra (comparisson) rb is done, and if true, pc <- pc + 2(offset).
 - **JAL**: JAL syntax is jal rd, offset. Where rd <- pc and then pc <- pc + 2(offset).
 - **JALR**: JALR syntax is jalr rd, ra, offset. Where rd <- pc and then pc <- ra + offset.
