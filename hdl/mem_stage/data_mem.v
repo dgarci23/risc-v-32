@@ -1,6 +1,6 @@
 module data_mem
 
-	#(parameter WIDTH = 256, parameter DEPTH = 8)
+	#(parameter WIDTH = 32, parameter DEPTH = 8)
 
 	(
 		input										clk,

@@ -13,7 +13,9 @@ module main
   (
         input       CLOCK_50,
         input [0:0] KEY,
-	output [6:0] HEX0
+		  output [6:0] HEX0, HEX1, HEX2, HEX3,
+		  output	[17:0] LEDR,
+		  output	[7:0]	 LEDG
   );
 
   wire [WIDTH-1:0] instr_addr, instr, data_addr, data_w, data_r;
@@ -53,15 +55,11 @@ module main
 
   io #(.IO_SIZE(IO_SIZE), .IO_DEPTH(IO_DEPTH)) io (
 	  .clk(CLOCK_50),
-	  .io_addr(1'b0),
+	  .io_addr(data_addr),
 	  .io_data_in(data_w),
-	  .io_w_en(data_w_en&&(data_addr >= 256)),
-	  .io_data_out(io_data_out)
-  );
-
-  seven_segment seven_segment (
-	  .in(io_data_out[3:0]),
-	  .out(HEX0)
+	  .io_w_en(data_w_en),
+	  .seven_seg_out({HEX3, HEX2, HEX1, HEX0}),
+	  .led_out({LEDR, LEDG})
   );
 
 endmodule
