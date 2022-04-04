@@ -9,8 +9,10 @@ module io
 	input	clk,
 	output	[IO_DEPTH-1:0]	seven_seg_out,
 	output	[IO_DEPTH-1:0] led_out,
+	input	[IO_DEPTH-1:0] sw_in,
 	input	[31:0] io_addr,
 	input	[IO_DEPTH-1:0] io_data_in,
+	output	[IO_DEPTH-1:0] io_data_out,
 	input	io_w_en
 );
 
@@ -49,5 +51,7 @@ seven_segment seven_segment_3 (
 
 
 assign led_out = led;
+
+assign io_data_out = sw_in;
 
 endmodule

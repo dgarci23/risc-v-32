@@ -16,7 +16,7 @@ module main_tb ();
     for (i = 0; i < 20; i++) begin
       #2;
       $display("PC: %d", uut.processor.IF_pc);
-      $display("IO: seven_seg: %d - data: %d - io_addr: %d", uut.io.seven_seg, uut.io.io_data_in, uut.io.io_addr);
+      $display("DATA FROM PROC: %d", uut.data_w);
       //$display("Mem: %b", uut.processor.ID_MemWrite);
     end
     $finish;

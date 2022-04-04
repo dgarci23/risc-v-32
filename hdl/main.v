@@ -13,6 +13,7 @@ module main
   (
         input       CLOCK_50,
         input [0:0] KEY,
+	input [17:0]	SW,
 		  output [6:0] HEX0, HEX1, HEX2, HEX3,
 		  output	[17:0] LEDR,
 		  output	[7:0]	 LEDG
@@ -22,19 +23,19 @@ module main
   wire [2:0] data_len;
   wire data_w_en, data_r_en;
 
-  wire [IO_DEPTH-1:0] io_data_out;
+  wire [IO_DEPTH-1:0] io_data_out, MEM_mem_in;
 
   processor #(.WIDTH(WIDTH)) processor (
     .CLK(CLOCK_50),
     .RST(~KEY[0]),
     .IF_pc(instr_addr),
     .IF_instr(instr),
-    .MEM_mem_in(data_w),
+    .MEM_mem_in(MEM_mem_in),
     .MEM_alu_out(data_addr),
     .MEM_MemLen(data_len),
     .MEM_MemRead(data_r_en),
     .MEM_MemWrite(data_w_en),
-    .MEM_mem_out(data_r)
+    .MEM_mem_out(data_w)
   );
 
   data_mem #(.WIDTH(DATA_SIZE), .DEPTH(DATA_DEPTH)) data_mem (
@@ -59,7 +60,16 @@ module main
 	  .io_data_in(data_w),
 	  .io_w_en(data_w_en),
 	  .seven_seg_out({HEX3, HEX2, HEX1, HEX0}),
-	  .led_out({LEDR, LEDG})
+	  .led_out({LEDR, LEDG}),
+	  .sw_in(SW),
+	  .io_data_out(io_data_out)
   );
+
+  mux2_1 io_mux (
+	  .in0(io_data_out),
+	  .in1(data_r),
+	  .sel(data_addr == 32'd256),
+	  .out(MEM_mem_in)
+ );
 
 endmodule
