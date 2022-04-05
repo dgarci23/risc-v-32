@@ -37,6 +37,7 @@ module main
     .MEM_MemWrite(data_w_en),	// Control signal for WRITE to memory
     .MEM_mem_out(MEM_mem_out)		// Data read FROM memory
   );
+  
 
   data_mem #(.WIDTH(DATA_SIZE), .DEPTH(DATA_DEPTH)) data_mem (
     .clk(CLOCK_50),
