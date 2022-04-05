@@ -14,12 +14,12 @@ module seven_segment (
                         4'h7: out = 7'b1111000;
                         4'h8: out = 7'b0000000;
                         4'h9: out = 7'b0010000;
-                        4'ha: out = 7'b1000000;
-                        4'hb: out = 7'b1111001;
-                        4'hc: out = 7'b0100100;
-                        4'hd: out = 7'b0110000;
-                        4'he: out = 7'b0011001;
-                        4'hf: out = 7'b0010010;
+                        4'ha: out = 7'b0001000;
+                        4'hb: out = 7'b0000011;
+                        4'hc: out = 7'b1000110;
+                        4'hd: out = 7'b0100001;
+                        4'he: out = 7'b0000110;
+                        4'hf: out = 7'b0001110;
                 endcase
         end
 endmodule

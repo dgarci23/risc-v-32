@@ -135,8 +135,14 @@ We will change the design of the PC, eliminating the hardcoding of the mux in th
 
 ## I/O
 
+### Redesigning the unit: processor, memory and more...
+
+In the future we would want to create a memory controller in order to implement the memory options found in the DE2-115. To make the design simpler, we will move the memory that was defined inside the controller into its own module. The image below shows the organization of the top-level entity (main.sv) and the main modules:
+
+![System Overview](docs/sys_overview.png)
+
 ### Simple I/O system
-We would want to have an io system to output results from our programs. We will design a simple io module that will expand the memory addresses to include an extra address for a 32 bit i/o location. First we will change the memory module, creating a chip enable signal that serves as an extra control signal on the reads and writes from memory. This chip enable signal will be a simple comparisson with the input address to memory so we do not read memory when we are out of scope. Then we will create a simple io with a single memory location of 32 bits. The write enable signal will be the same signal from the processor to main memory. The address does not matter since we only have one address location. At this point we can write to an output port using the store instruction.
+We would want to have an I/O system to output results from our programs. The first step will be to create a simple extra location in memory that would serve as the "I/O register". We can connect its output to a seven segment display and start to test the module. After proper functionality, we move to increase the complexity of the I/O system. For this we work in two things in parallel: (i) creating a mapping map where the different peripherals in the DE2-115 are mapped to addresses, and, (ii) ensuring proper read and write functionality in the I/O module.
 
 
 ## Some notes on Computer Architecture and RISC-V

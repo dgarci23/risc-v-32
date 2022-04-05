@@ -4,7 +4,8 @@ module main_tb ();
 
   main uut (
     .CLOCK_50(clk),
-    .KEY(~rst)
+    .KEY(~rst),
+    .SW(20)
   );
 
   always #1 clk = ~clk;
@@ -16,7 +17,7 @@ module main_tb ();
     for (i = 0; i < 20; i++) begin
       #2;
       $display("PC: %d", uut.processor.IF_pc);
-      $display("DATA FROM PROC: %d", uut.data_w);
+      $display("DATA TO PROC: %d", uut.MEM_mem_out);
       //$display("Mem: %b", uut.processor.ID_MemWrite);
     end
     $finish;
