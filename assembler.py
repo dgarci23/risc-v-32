@@ -1,41 +1,63 @@
 # Assembler
-from openpyxl import load_workbook
+# from openpyxl import load_workbook
 
 # Some memory dependent variables
 hex = "32"
 led = "36"
 sw = "40"
 
-# generate_encoding reads the excel file with the opcodes to create a dictionary for opcodes and syntax
-def generate_encoding():
-    encoding = {}
-
-    ISA = load_workbook("ISA Encoding.xlsx")
-
-    wb = ISA.active
-
-    prev_op = ""
-    for row in wb.values:
-        opcode = ""
-        func3 = ""
-
-        if row[0] == None: continue
-
-        for digit in row[26:33]:
-            opcode += str(digit)
-
-        for digit in row[18:21]:
-            func3 += str(digit)
-
-        if "None" in opcode:
-            encoding[row[0].lower().strip()] = [prev_op, func3]
+class Instruction:
+    def __init__(self, line, index, encoding):
+        self.index = index
+        line = common_names(line).split(" ")
+        # Checking for labels and raising instruction exceptions
+        if (line[0] not in encoding.keys()):
+            if (":" in line[0]):
+                self.label = line[0]
+            else:
+                raise SyntaxError("Line: {}, Instruction: {}".format(self.index, line[0]))
         else:
-            encoding[row[0].lower().strip()] = [opcode, func3]
-            prev_op = opcode
+            self.label = None
+            self.instr = line[0]
+        # Checking for instructions when there is a label
+        if (self.label != None and line[1] not in encoding.keys()):
+            raise SyntaxError("Line: {}, Instruction: {}".format(self.index, line[1]))
+        elif (self.label != None):
+            self.instr = line[1]
+        # Get the func3 and the opcode
+        if (self.instr == "nops"):
+            self.assembly = 32*"0"
+            self.opcode = "0000000"
+        else:
+            self.opcode, self.func3 = encoding[self.instr]
 
-    return encoding
+
+        if (self.label == None):
+            self.instr_encoded = assemble(line, self.instr, self.opcode, self.func3, encoding)
+        else:
+            self.instr_encoded = assemble(line[1:len(line)], self.instr, self.opcode, self.func3, encoding)
+
+    def getInstrEncoded(self):
+        return self.instr_encoded
+
+def load_encoding(encoding):
+
+    fp = open("encoding.txt", "r")
+
+    for line in fp.readlines():
+        line = line.replace(",", "")
+        line = line.replace("\n", "")
+        line = line.split(" ")
+        if len(line)==2:
+            encoding[line[0]] = [line[1], None]
+        if len(line)==3:
+            encoding[line[0]] = [line[1], line[2]]
+
+    fp.close()
 
 def common_names(line):
+    line = line.replace(", ", " ")
+    line = line.replace(",", " ")
     line = line.replace("#", "")
     line = line.replace("fp", "8")
     line = line.replace("sp", "2")
@@ -47,52 +69,37 @@ def common_names(line):
 
     return line
 
-def assemble(line, encoding):
-
-    assembly = ""
-
-    line = line.replace(",", "")
-
-    line = common_names(line)
-
-    # NOPS
-    if (line == "nops\n"):
-        assembly = 32*"0"
-        opcode = "0000000"
-    else:
-        instr = line.split(" ")[0].lower()
-        opcode, func3 = encoding[instr]
-
+def assemble(line, instr, opcode, func3, encoding):
 
     # BRANCH
     if (opcode == "1100011"):
-        ra, rb, imm = line.split(" ")[1:4]
+        ra, rb, imm = line[1:4]
         ra = getBinStr(ra, 5)
         rb = getBinStr(rb, 5)
         imm = getBinStr(imm, 12)
         assembly = imm[0] + imm[2:8] + rb + ra + func3 + imm[8:12] + imm[1] + opcode
     # JALR
     if (opcode == "1100111"):
-        rd, ra, imm = line.split(" ")[1:4]
+        rd, ra, imm = line[1:4]
         rd = getBinStr(rd, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)
         assembly = imm + ra + func3 + rd + opcode
     # JAL
     if (opcode == "1101111"):
-        rd, imm = line.split(" ")[1:3]
+        rd, imm = line[1:3]
         rd = getBinStr(rd, 5)
         imm = getBinStr(imm, 20)
         assembly = imm[0] + imm[10:20] + imm[9] + imm[1:9] + rd + opcode
     # LUI and AUIPC
     if (opcode == "0110111" or opcode == "0010111"):
-        rd, imm = line.split(" ")[1:3]
+        rd, imm = line[1:3]
         rd = getBinStr(rd, 5)
         imm = getBinStr(imm, 20)
         assembly = imm + rd + opcode
     # Immediate Arithmetic
     if (opcode == "0010011"):
-        rd, ra, imm = line.split(" ")[1:4]
+        rd, ra, imm = line[1:4]
         rd = getBinStr(rd, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)
@@ -105,7 +112,7 @@ def assemble(line, encoding):
         assembly += ra + func3 + rd + opcode
     # Register Arithmetic
     if (opcode == "0110011"):
-        rd, ra, rb = line.split(" ")[1:4]
+        rd, ra, rb = line[1:4]
         rd = getBinStr(rd, 5)
         ra = getBinStr(ra, 5)
         rb = getBinStr(rb, 5)
@@ -116,14 +123,14 @@ def assemble(line, encoding):
         assembly += rb + ra + func3 + rd + opcode
     # Load
     if (opcode == "0000011"):
-        rd, ra, imm = line.split(" ")[1:4]
+        rd, ra, imm = line[1:4]
         rd = getBinStr(rd, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)
         assembly = imm + ra + func3 + rd + opcode
     #  Store
     if (opcode == "0100011"):
-        rb, ra, imm = line.split(" ")[1:4]
+        rb, ra, imm = line[1:4]
         rb = getBinStr(rb, 5)
         ra = getBinStr(ra, 5)
         imm = getBinStr(imm, 12)
@@ -155,13 +162,17 @@ def getBinStr(x, l):
 code_f = open("program.s", "r")
 mem_f = open("hdl/if_stage/text.mem", "w")
 
+encoding = {}
+load_encoding(encoding)
+
 index = 64
 
-encoding = generate_encoding()
+instructions = []
 
 for line in code_f.readlines():
-    assembly = assemble(line, encoding)
-    mem_f.write(assembly + "\n")
+    instr = Instruction(line, 64 - index, encoding)
+    instructions.append(instr)
+    mem_f.write(instr.getInstrEncoded() + "\n")
     index -= 1
 
 for i in range(index):
