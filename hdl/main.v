@@ -11,12 +11,15 @@ module main
   )
 
   (
-        input       CLOCK_50,
-        input [0:0] KEY,
-	input [17:0]	SW,
-		  output [6:0] HEX0, HEX1, HEX2, HEX3,
-		  output	[17:0] LEDR,
-		  output	[7:0]	 LEDG
+        input      		CLOCK_50,
+        input 	[0:0] 	KEY,
+		  input 	[17:0]	SW,
+		  output [6:0] 	HEX0, HEX1, HEX2, HEX3,
+		  output	[17:0] 	LEDR,
+		  output	[7:0]	 	LEDG,
+		  // SRAM
+		  inout 	[15:0] 	SRAM_DQ,
+		  output [19:0]	SRAM_ADDR
   );
 
   wire [WIDTH-1:0] instr_addr, instr, data_addr, data_w, data_r;
@@ -38,8 +41,21 @@ module main
     .MEM_mem_out(MEM_mem_out)		// Data read FROM memory
   );
   
+	onchip_memory u0 (
+		.onchip_memory2_s1_address       (),       //     onchip_memory2_s1.address
+		.onchip_memory2_s1_clken         (),         //                      .clken
+		.onchip_memory2_s1_chipselect    (),    //                      .chipselect
+		.onchip_memory2_s1_write         (),         //                      .write
+		.onchip_memory2_s1_readdata      (),      //                      .readdata
+		.onchip_memory2_s1_writedata     (),     //                      .writedata
+		.onchip_memory2_s1_byteenable    ({MemLen[1]&MemLen}),    //                      .byteenable
+		.onchip_memory2_reset1_reset     (~KEY[0]),     // onchip_memory2_reset1.reset
+		.onchip_memory2_reset1_reset_req (~KEY[0]), //                      .reset_req
+		.onchip_memory2_clk1_clk         (CLOCK_50)          //   onchip_memory2_clk1.clk
+	);
+  
 
-  data_mem #(.WIDTH(DATA_SIZE), .DEPTH(DATA_DEPTH)) data_mem (
+  /*data_mem #(.WIDTH(DATA_SIZE), .DEPTH(DATA_DEPTH)) data_mem (
     .clk(CLOCK_50),
     .in(data_w),											// Data TO memory
     .addr(data_addr[$clog2(DATA_SIZE)-1:0]),		// Address
@@ -48,7 +64,7 @@ module main
     .MemWrite(data_w_en),
     .CE(data_addr < 256),
     .out(data_r)											// Data FROM memory
-  );
+  );*/
 
   text_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
     .addr(instr_addr),

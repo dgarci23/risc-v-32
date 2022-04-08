@@ -1,36 +1,60 @@
 # Assembler
 from openpyxl import load_workbook
 
-encoding = {}
+# Some memory dependent variables
+hex = "32"
+led = "36"
+sw = "40"
 
-ISA = load_workbook("ISA Encoding.xlsx")
+# generate_encoding reads the excel file with the opcodes to create a dictionary for opcodes and syntax
+def generate_encoding():
+    encoding = {}
 
-wb = ISA.active
+    ISA = load_workbook("ISA Encoding.xlsx")
 
-prev_op = ""
-for row in wb.values:
-    opcode = ""
-    func3 = ""
+    wb = ISA.active
 
-    if row[0] == None: continue
+    prev_op = ""
+    for row in wb.values:
+        opcode = ""
+        func3 = ""
 
-    for digit in row[26:33]:
-        opcode += str(digit)
+        if row[0] == None: continue
 
-    for digit in row[18:21]:
-        func3 += str(digit)
+        for digit in row[26:33]:
+            opcode += str(digit)
 
-    if "None" in opcode:
-        encoding[row[0].lower().strip()] = [prev_op, func3]
-    else:
-        encoding[row[0].lower().strip()] = [opcode, func3]
-        prev_op = opcode
+        for digit in row[18:21]:
+            func3 += str(digit)
 
-def assemble(line):
+        if "None" in opcode:
+            encoding[row[0].lower().strip()] = [prev_op, func3]
+        else:
+            encoding[row[0].lower().strip()] = [opcode, func3]
+            prev_op = opcode
+
+    return encoding
+
+def common_names(line):
+    line = line.replace("#", "")
+    line = line.replace("fp", "8")
+    line = line.replace("sp", "2")
+    line = line.replace("ra", "1")
+    line = line.replace("led", led)
+    line = line.replace("hex", hex)
+    line = line.replace("switch", sw)
+    line = line.replace("x", "")
+
+    return line
+
+def assemble(line, encoding):
 
     assembly = ""
 
     line = line.replace(",", "")
+
+    line = common_names(line)
+
     # NOPS
     if (line == "nops\n"):
         assembly = 32*"0"
@@ -109,7 +133,6 @@ def assemble(line):
 
     return assembly
 
-
 def getBinStr(x, l):
 
     if x[0:2] == "0b":
@@ -134,8 +157,10 @@ mem_f = open("hdl/if_stage/text.mem", "w")
 
 index = 64
 
+encoding = generate_encoding()
+
 for line in code_f.readlines():
-    assembly = assemble(line)
+    assembly = assemble(line, encoding)
     mem_f.write(assembly + "\n")
     index -= 1
 
