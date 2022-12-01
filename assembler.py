@@ -1,6 +1,18 @@
 # Assembler
 # from openpyxl import load_workbook
 
+# Serial
+import serial
+import time
+ser = serial.Serial("COM11")
+
+def sendSerial(x):
+
+    packet = bytearray()
+    packet.append(x)
+
+    ser.write(packet)
+
 # Some memory dependent variables
 hex = "32"
 led = "36"
@@ -143,7 +155,7 @@ def assemble(line, instr, opcode, func3, encoding):
 def getBinStr(x, l):
 
     if x[0:2] == "0b":
-        x = format(int(x[3:len(x)]), "b")
+        x = format(int(x[2:len(x)]), "b")
     if x[0:2] == "0x":
         x = format(int(x, 16), "b")
     else:
@@ -172,6 +184,7 @@ instructions = []
 for line in code_f.readlines():
     instr = Instruction(line, 64 - index, encoding)
     instructions.append(instr)
+    print(instr.getInstrEncoded())
     mem_f.write(instr.getInstrEncoded() + "\n")
     index -= 1
 
