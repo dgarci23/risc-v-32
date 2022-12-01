@@ -1,4 +1,12 @@
 
+State Machine - |main|rx_controller:rx|state
+Name state.STOP state.DATA state.START state.000 state.CLEANUP 
+state.000 0 0 0 0 0 
+state.START 0 0 1 1 0 
+state.DATA 0 1 0 1 0 
+state.STOP 1 0 0 1 0 
+state.CLEANUP 0 0 0 1 1 
+
 State Machine - |main|processor:processor|branch_prediction_unit:branch_prediction_unit|state
 Name state.SBT state.BT state.NT state.00 
 state.00 0 0 0 0 
