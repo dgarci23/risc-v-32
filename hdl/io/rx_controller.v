@@ -39,6 +39,7 @@ module rx_controller
 			
 			START:
 				begin
+					RX_DONE <= 0;
 					if (counter == CLKS_PER_BIT/2)
 						begin
 							if (UART_RXD == 1'b0)
@@ -57,6 +58,7 @@ module rx_controller
 				end
 			DATA:
 				begin
+					RX_DONE <= 0;
 					if (counter < CLKS_PER_BIT - 1)
 					begin
 						counter <= counter + 1;
@@ -81,6 +83,7 @@ module rx_controller
 				end
 			STOP:
 				begin
+					RX_DONE <= 0;
 					if (counter < CLKS_PER_BIT - 1)
 					begin
 						counter <= counter + 1;
