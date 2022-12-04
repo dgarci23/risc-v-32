@@ -22,18 +22,20 @@ module pc_selector
 		output reg 		[WIDTH-1:0] pc_in
 	);
 	
-	always @(*)
-		if (ID_Jump)
+	always @(*) begin
+		if (ID_Jump) begin
 			if (PCSrc == 2'b10)
 				pc_in = indirect_pc;
 			else
 				pc_in = imm_pc;
-		else
-			if (ID_Branch & ID_prediction!=ID_correction)
-					if (ID_prediction)
-						pc_in = ID_pc + 32'd4;
-					else
+		end
+		else begin
+			if (ID_Branch & (ID_prediction^ID_correction)) begin
+					if (ID_correction)
 						pc_in = ID_pc + ID_imm;
+					else
+						pc_in = ID_pc + 32'd4;
+			end
 			else
 				if (IF_Branch)
 					if (IF_prediction)
@@ -42,6 +44,8 @@ module pc_selector
 						pc_in = IF_pc + 32'd4;
 				else
 					pc_in = IF_pc + 32'd4;
+		end
+	end
 	
 endmodule
 	
