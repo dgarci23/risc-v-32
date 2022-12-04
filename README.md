@@ -89,7 +89,7 @@ Pipeline registers hold useful information about the instruction that would be n
 ## Data Hazards
 Data hazards can occur when a current instruction in the pipeline requires the execution of another instruction also in the pipeline. A way in which we deal with data hazards is by using a forwarding unit. The forwarding unit determines if there is a data hazards, and then it takes the result still in the pipeline and transfers it directly to the current instruction.
 
-To better understand how to implement the forwarding logic, we classify instructions depending on the forwarding risk they have. An instruction has a forwarding risk in rd if it writes values to memory and has risk in rs1 or rs2 if it does operations using the register values. The instructions then can be classified as follows:
+To better understand how to implement the forwarding logic, we classify instructions depending on the forwarding risk they have. An instruction has a forwarding risk in rd if it writes values to memory and has risk in rs1 or rs2 if it does operations using the register values. The instructions then can be classified as follows, where the order is the risk for rs1, rs2 and rd:
 - 111: Register arithmetic operations (like ADD, SUB, etc).
 - 101: Immediate arithmetic operations (ADDI, ORI, etc), Jump and Link Register (JALR) and Load instructions (LOAD).
 - 001: Jump and Link (JAL), Load Upper Immediate (LUI) and Add Upper Immediate PC (AUIPC).
