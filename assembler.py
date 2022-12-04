@@ -4,7 +4,7 @@
 # Serial
 import serial
 import time
-ser = serial.Serial("COM11")
+ser = serial.Serial("COM13")
 
 def sendSerial(x):
 
@@ -182,10 +182,16 @@ index = 64
 instructions = []
 
 for line in code_f.readlines():
+    print(line)
     instr = Instruction(line, 64 - index, encoding)
     instructions.append(instr)
     print(instr.getInstrEncoded())
     mem_f.write(instr.getInstrEncoded() + "\n")
+    for i in instr.getInstrEncoded().split():
+        instr_int = int(i, 2)
+        tx_data = instr_int.to_bytes(1, byteorder="big")
+        ser.write(tx_data)
+        time.sleep(0.05)
     index -= 1
 
 for i in range(index):
