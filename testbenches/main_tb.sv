@@ -4,22 +4,18 @@ module main_tb ();
 
   main uut (
     .CLOCK_50(clk),
-    .KEY(~rst),
-    .SW(20)
+    .KEY({~rst, ~rst, ~rst}),
+    .SW(18'd0)
   );
 
   always #1 clk = ~clk;
 
-  integer i;
 
   initial begin
-    clk = 0; rst = 1; #2; rst = 0; #1;
-    for (i = 0; i < 20; i++) begin
-      #2;
-      $display("PC: %d", uut.processor.IF_pc);
-      $display("DATA TO PROC: %d", uut.MEM_mem_out);
-      //$display("Mem: %b", uut.processor.ID_MemWrite);
-    end
+    clk = 0; rst = 1; #2; rst = 0; //#40;
+    $dumpfile("test.vcd");
+    $dumpvars(0, uut);
+    #100;
     $finish;
   end
 

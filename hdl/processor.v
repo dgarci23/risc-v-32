@@ -5,6 +5,7 @@ module processor
 	(
 		input CLK,
 		input RST,
+		input EN,
 		// Instruction
 		output [WIDTH-1:0] IF_pc,
 		input  [WIDTH-1:0] IF_instr,
@@ -77,7 +78,7 @@ module processor
 
 	register PC (
 		.rst(RST),
-		.en(~(MemStall)), // Updates except when there is a Memory Stall
+		.en((~MemStall)&EN), // Updates except when there is a Memory Stall
 		.clk(CLK),
 		.d(pc_in),
 		.q(IF_pc)
@@ -130,7 +131,7 @@ module processor
 	// IF/ID Register
 	register #(.BUS_WIDTH(2*32+1)) IF_ID_register (
 		.rst(((ID_correction!=ID_prediction)&ID_Branch)|RST|ID_Jump), // Resets when there is a Branching, and the instructions in the IF/ID register must be thrown out
-		.en(~(MemStall)), // Since PC is one instruction ahead of the stalled one, we also need to freeze this reg
+		.en((~MemStall)&EN), // Since PC is one instruction ahead of the stalled one, we also need to freeze this reg
 		.clk(CLK),
 		.d({IF_instr, IF_pc, IF_prediction}),
 		.q({ID_instr, ID_pc, ID_prediction})
@@ -205,7 +206,7 @@ module processor
 	// ID-EX Register
 	register #(.BUS_WIDTH(4*32+23+5)) ID_EX_register (
 		.rst(RST),
-		.en(1'b1), // THIS MIGHT CHANGE
+		.en(EN), // THIS MIGHT CHANGE
 		.clk(CLK),
 		.d({ID_pc, ID_imm, ID_alu_in1, ID_alu_in2, ID_rd, ID_signals}),
 		.q({EX_pc, EX_imm, EX_alu_in1, EX_alu_in2, EX_rd, EX_signals})
@@ -245,7 +246,7 @@ module processor
 	// EX-MEM Register
 	register #(.BUS_WIDTH(3*32+23+5)) EX_MEM_register (
 		.rst(RST),
-		.en(1'b1), // THIS MIGHT CHANGE
+		.en(EN), // THIS MIGHT CHANGE
 		.clk(CLK),
 		.d({EX_pc, EX_alu_out, EX_alu_in2, EX_rd, EX_signals}),
 		.q({MEM_pc, MEM_alu_out, MEM_mem_in, MEM_rd, MEM_signals})
@@ -264,7 +265,7 @@ module processor
 	// MEM-WB Register
 	register #(.BUS_WIDTH(32+23+5)) MEM_WB_register (
 		.rst(RST),
-		.en(1'b1),
+		.en(EN),
 		.clk(CLK),
 		.d({MEM_wb_out, MEM_signals, MEM_rd}),
 		.q({WB_wb_out, WB_signals, WB_rd})
