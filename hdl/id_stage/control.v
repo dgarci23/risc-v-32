@@ -62,7 +62,7 @@ module control
 	wire [2:0] ALUSrc = JALR|JAL ? 3'd2 : (LUI ? 3'd5 : (AUIPC ? 3'd3 : (ARITH_IMM|LOAD|STORE ? 3'd1 : (ARITH ? 3'd0 : 3'd0))));
 	wire [3:0] ALUOp = (JALR|JAL|LUI|AUIPC|ADDI|ADD|LOAD|STORE) ? 4'b0010 : (SLLI|SLL ? 4'b0101 : (SLTI|SLT ? 4'b1000 : (SLTIU|SLTU ? 4'b1001 : (XORI|XOR ? 4'b0100 : (SRLI|SRL ? 4'b0110 : (SRAI|SRA ? 4'b0111 : (ORI|OR ? 4'b0001 : (ANDI|AND ? 4'b0 : (SUB ? 4'b0011 : 4'b0)))))))));
 	wire [2:0] FlagSel = BEQ ? 3'd0 : (BNE ? 3'd1 : (BLT ? 3'd2 : (BGE ? 3'd4 : (BLTU ? 3'd3 : (BGEU ? 3'd5 : 3'd5)))));
-	wire [2:0] MemLen = LB|SB ? 3'd0 : (LH|SH ? 3'b001 : (LW|SW ? 3'b010 : (LBU ? 3'b011 : (LHU ? 3'b100 : 3'b100))));
+	wire [2:0] MemLen = LB|SB ? 3'b001 : (LH|SH ? 3'b010 : (LW|SW ? 3'b011 : (LBU ? 3'b101 : (LHU ? 3'b110 : 3'b000))));
 	wire [2:0] FwdRisk = JALR|ARITH_IMM|LOAD ? 3'b101 : (JAL|LUI|AUIPC ? 3'b001 : (ARITH ? 3'b111 : (STORE ? 3'b110 : (BRANCH ? 3'b110 : 3'b0))));
 	wire Branch = BRANCH;
 	wire Jump = JALR|JAL;
