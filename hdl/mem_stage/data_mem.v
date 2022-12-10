@@ -27,7 +27,7 @@ module data_mem
 		.out(ram_out)
   	);
 
-	/*ram2port text_mem (
+	ram2port text_mem (
 		.byteena_a(byteen),
 		.clock(clk),
 		.data(ram_in),
@@ -35,7 +35,7 @@ module data_mem
 		.wraddress(addr[$clog2(WIDTH)-1:2]),
 		.wren(MemWrite & CE),
 		.q(ram_out)
-  	);*/
+  	);
 
 	always @(*) begin
 		out = ram_out;

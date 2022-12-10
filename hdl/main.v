@@ -81,50 +81,23 @@ module main
     .out(data_r)											// Data FROM memory
   );
 
-  test_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH), .MODE("test")) text_mem (
+  /*test_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH), .MODE("test")) text_mem (
     .addr(instr_addr[WIDTH-1:2]),
 	.clk(CLOCK_50),
 	.in(rx_data),
 	.byteen(4'b1111),
 	.we(rx_done&SW[17]),
     .out(instr)
-  );
+  );*/
 
-  /*text_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
+  text_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
     .raddr(instr_addr),
 	 .in(rx_data),
 	 .clk(CLOCK_50),
 	 .rst(~KEY_DB[1]),
 	 .we(rx_done&SW[17]),
     .out(instr)
-  );*/
-  
-  /*reg [23:0] instr_wdata;
-	reg [31:0] instr_waddr;
-	
-	ram2port text_mem (
-		.byteena_a(4'b1111),
-		.clock(CLOCK_50),
-		.data({rx_data, instr_wdata}),
-		.rdaddress(instr_addr[31:2]),
-		.wraddress(instr_waddr[31:2]),
-		.wren(rx_done&SW[17] & (instr_waddr[1:0]==2'b11)),
-		.q(instr)
-  	);
-	
-	always @(posedge CLOCK_50) begin
-			if (~KEY_DB[1]) begin
-				instr_waddr <= 0;
-				instr_wdata <= 0;
-			end
-			else begin
-				if (rx_done) begin
-					instr_waddr <= instr_waddr + 1;
-					instr_wdata <= {rx_data, instr_wdata[23:8]};
-				end
-			end
-	end*/
-
+  );
 
   io #(.IO_SIZE(IO_SIZE), .IO_DEPTH(IO_DEPTH)) io (
 	  .clk(CLOCK_50),
