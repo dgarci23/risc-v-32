@@ -63,7 +63,7 @@ module main
   assign LEDR[9] = rx_done;
   assign LEDR[8:0] = instr_addr;
   
-  	rx_controller rx (
+	rx_controller rx (
 		.clk(CLOCK_50),
 		.UART_RXD(UART_RXD),
 		.RX_DATA(rx_data),
@@ -81,19 +81,23 @@ module main
     .out(data_r)											// Data FROM memory
   );
 
-  /*test_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
-    .raddr(instr_addr),
+  test_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH), .MODE("test")) text_mem (
+    .addr(instr_addr[WIDTH-1:2]),
+	.clk(CLOCK_50),
+	.in(rx_data),
+	.byteen(4'b1111),
+	.we(rx_done&SW[17]),
     .out(instr)
-  );*/
+  );
 
-  text_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
+  /*text_mem #(.WIDTH(TEXT_SIZE), .DEPTH(TEXT_DEPTH)) text_mem (
     .raddr(instr_addr),
 	 .in(rx_data),
 	 .clk(CLOCK_50),
 	 .rst(~KEY_DB[1]),
 	 .we(rx_done&SW[17]),
     .out(instr)
-  );
+  );*/
   
   /*reg [23:0] instr_wdata;
 	reg [31:0] instr_waddr;

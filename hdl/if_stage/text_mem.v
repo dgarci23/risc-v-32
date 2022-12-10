@@ -14,7 +14,7 @@ module text_mem
 	reg [3*DEPTH-1:0] instr_wdata;
 	reg [4*DEPTH-1:0] instr_waddr;
 	
-	ram2port text_mem (
+	/*ram2port text_mem (
 		.byteena_a(4'b1111),
 		.clock(clk),
 		.data({in, instr_wdata}),
@@ -22,7 +22,7 @@ module text_mem
 		.wraddress(instr_waddr[31:2]),
 		.wren(we & (instr_waddr[1:0]==2'b11)),
 		.q(out)
-  	);
+  	);*/
 	
 	always @(posedge clk) begin
 			if (rst) begin

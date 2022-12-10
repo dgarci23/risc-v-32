@@ -18,8 +18,16 @@ module data_mem
 	reg [3:0] byteen;
 	reg [7:0] sign_ex;
 
+	test_mem #(.WIDTH(WIDTH), .DEPTH(DEPTH), .MODE("data")) text_mem (
+		.addr(addr[$clog2(WIDTH)-1:2]),
+		.clk(clk),
+		.in(ram_in),
+		.byteen(byteen),
+		.we(MemWrite & CE),
+		.out(ram_out)
+  	);
 
-	ram2port text_mem (
+	/*ram2port text_mem (
 		.byteena_a(byteen),
 		.clock(clk),
 		.data(ram_in),
@@ -27,7 +35,7 @@ module data_mem
 		.wraddress(addr[$clog2(WIDTH)-1:2]),
 		.wren(MemWrite & CE),
 		.q(ram_out)
-  	);
+  	);*/
 
 	always @(*) begin
 		out = ram_out;
