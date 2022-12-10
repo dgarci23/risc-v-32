@@ -10,142 +10,129 @@ module data_mem
 		input										MemRead,
 		input										MemWrite,
 		input										CE,
-		output reg	[4*DEPTH - 1:0]		out
+		output 		 reg [4*DEPTH - 1:0]		out
 	);
 
-	reg [DEPTH-1:0] data0 [WIDTH-1:0];
-	reg [DEPTH-1:0] data1 [WIDTH-1:0];
-	reg [DEPTH-1:0] data2 [WIDTH-1:0];
-	reg [DEPTH-1:0] data3 [WIDTH-1:0];
+	reg [4*DEPTH-1:0] ram_in;
+	wire [4*DEPTH-1:0] ram_out;
+	reg [3:0] byteen;
+	reg [7:0] sign_ex;
 
-	integer i;
-	initial begin for (i = 0; i < WIDTH; i = i + 1) begin
-		data0[i] = i[7:0]*4;
-		data1[i] = i[7:0]*4+1;
-		data2[i] = i[7:0]*4+2;
-		data3[i] = i[7:0]*4+3;
-		end
+
+	ram2port text_mem (
+		.byteena_a(byteen),
+		.clock(clk),
+		.data(ram_in),
+		.rdaddress(addr[$clog2(WIDTH)-1:2]),
+		.wraddress(addr[$clog2(WIDTH)-1:2]),
+		.wren(MemWrite & CE),
+		.q(ram_out)
+  	);
+
+	always @(*) begin
+		out = ram_out;
+		case (MemLen)
+			3'b001: begin
+				case (addr[1:0])
+					2'b00: begin
+						out = {24'd0, ram_out[7:0]};
+					end
+					2'b01: begin
+						out = {24'd0, ram_out[15:8]};
+					end
+					2'b10: begin
+						out = {24'd0, ram_out[23:16]};
+					end
+					2'b01: begin
+						out = {24'd0, ram_out[31:24]};
+					end
+				endcase
+			end	
+			3'b010: begin
+				out = {16'd0, ram_out[15:0]};
+				if (addr[1]) begin
+					out = {16'd0, ram_out[31:16]};
+				end
+			end
+			3'b101: begin
+				case (addr[1:0])
+					2'b00: begin
+						out = {{3{sign_ex}}, ram_out[7:0]};
+					end
+					2'b01: begin
+						out = {{3{sign_ex}}, ram_out[15:8]};
+					end
+					2'b10: begin
+						out = {{3{sign_ex}}, ram_out[23:16]};
+					end
+					2'b01: begin
+						out = {{3{sign_ex}}, ram_out[31:24]};
+					end
+				endcase
+			end
+			3'b010: begin
+				out = {{2{sign_ex}}, ram_out[15:0]};
+				if (addr[1]) begin
+					out = {{2{sign_ex}}, ram_out[31:16]};
+				end
+			end
+			default: begin
+				out = ram_out;
+			end
+		endcase
 	end
 
-	always @(posedge clk)
-		if (MemRead&&CE)
-			case (MemLen)
-				0: begin
-					case (addr[1:0])
-						0: out = {{24{data0[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data0[addr[$clog2(WIDTH)-1:2]]};
-						1: out = {{24{data1[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data1[addr[$clog2(WIDTH)-1:2]]};
-						2: out = {{24{data2[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data2[addr[$clog2(WIDTH)-1:2]]};
-						3: out = {{24{data3[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data3[addr[$clog2(WIDTH)-1:2]]};
-						default: out = 0;
-					endcase
+	always @(*) begin
+		ram_in = in;
+		byteen = 4'b1111;
+ 		case (MemLen[1:0]) 
+			2'b01: begin
+				byteen = 4'b0001;
+				if (addr[1:0]==2'b01) begin
+					ram_in[15:8] = in[7:0];
+					byteen = 4'b0010;
 				end
-				1: begin
-					case (addr[1:0])
-						0: out = {{16{data1[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data1[addr[$clog2(WIDTH)-1:2]], data0[addr[$clog2(WIDTH)-1:2]]};
-						1: out = {{16{data2[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data2[addr[$clog2(WIDTH)-1:2]], data1[addr[$clog2(WIDTH)-1:2]]};
-						2: out = {{16{data3[addr[$clog2(WIDTH)-1:2]][DEPTH-1]}}, data3[addr[$clog2(WIDTH)-1:2]], data2[addr[$clog2(WIDTH)-1:2]]};
-						3: out = {{16{data0[addr[$clog2(WIDTH)-1:2]+1][DEPTH-1]}}, data0[addr[$clog2(WIDTH)-1:2]+1], data3[addr[$clog2(WIDTH)-1:2]]};
-						default: out = 0;
-					endcase
+				if (addr[1:0]==2'b10) begin
+					ram_in[23:16] = in[7:0];
+					byteen = 4'b0100;
 				end
-				3: begin
-					case (addr[1:0])
-						0: out = {24'b0, data0[addr[$clog2(WIDTH)-1:2]]};
-						1: out = {24'b0, data1[addr[$clog2(WIDTH)-1:2]]};
-						2: out = {24'b0, data2[addr[$clog2(WIDTH)-1:2]]};
-						3: out = {24'b0, data3[addr[$clog2(WIDTH)-1:2]]};
-						default: out = 0;
-					endcase
+				if (addr[1:0]==2'b11) begin
+					ram_in[31:24] = in[7:0];
+					byteen = 4'b1000;
 				end
-				4: begin
-					case (addr[1:0])
-						0: out = {16'b0, data1[addr[$clog2(WIDTH)-1:2]], data0[addr[$clog2(WIDTH)-1:2]]};
-						1: out = {16'b0, data2[addr[$clog2(WIDTH)-1:2]], data1[addr[$clog2(WIDTH)-1:2]]};
-						2: out = {16'b0, data3[addr[$clog2(WIDTH)-1:2]], data2[addr[$clog2(WIDTH)-1:2]]};
-						3: out = {16'b0, data0[addr[$clog2(WIDTH)-1:2]+1], data3[addr[$clog2(WIDTH)-1:2]]};
-						default: out = 0;
-					endcase
+			end
+			2'b10: begin
+				byteen = 4'b0011;
+				if (addr[1]) begin
+					ram_in[31:16] = in[15:0];
+					byteen = 4'b1100;
 				end
-				2: begin
-					case (addr[1:0])
-						0: out = {data3[addr[$clog2(WIDTH)-1:2]], data2[addr[$clog2(WIDTH)-1:2]], data1[addr[$clog2(WIDTH)-1:2]], data0[addr[$clog2(WIDTH)-1:2]]};
-						1: out = {data0[addr[$clog2(WIDTH)-1:2]+1], data3[addr[$clog2(WIDTH)-1:2]], data2[addr[$clog2(WIDTH)-1:2]], data1[addr[$clog2(WIDTH)-1:2]]};
-						2: out = {data1[addr[$clog2(WIDTH)-1:2]+1], data0[addr[$clog2(WIDTH)-1:2]+1], data3[addr[$clog2(WIDTH)-1:2]], data2[addr[$clog2(WIDTH)-1:2]]};
-						3: out = {data2[addr[$clog2(WIDTH)-1:2]+1], data1[addr[$clog2(WIDTH)-1:2]+1], data0[addr[$clog2(WIDTH)-1:2]+1], data3[addr[$clog2(WIDTH)-1:2]]};
-					endcase
+			end
+			default: ram_in = in;
+		endcase
+	end
+
+	always @(*) begin
+		case (MemLen[1:0])
+			2'b01: begin
+				case (addr[1:0])
+					2'b00: sign_ex = {8{ram_out[7]}};
+					2'b01: sign_ex = {8{ram_out[15]}};
+					2'b10: sign_ex = {8{ram_out[23]}};
+					2'b11: sign_ex = {8{ram_out[31]}};
+				endcase
+			end	
+			2'b10: begin
+				if (addr[1]) begin
+					sign_ex = {8{ram_out[31]}};
 				end
-				default: begin end
-
-			endcase
-
-
-
-
-
-
-	always @(posedge clk)
-		if (MemWrite&&CE)
-			case (MemLen)
-				0: begin
-					case (addr[1:0])
-						0: data0[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-						1: data1[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-						2: data2[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-						3: data3[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-					endcase
+				else begin
+					sign_ex = {8{ram_out[15]}};
 				end
-				1: begin
-					case (addr[1:0])
-						0: begin
-							data0[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data1[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-						end
-						1: begin
-							data1[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data2[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-						end
-						2: begin
-							data2[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-						end
-						3: begin
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[15:8];
-						end
-					endcase
-				end
-				2: begin
-					case (addr[1:0])
-						0: begin
-							data0[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data1[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-							data2[addr[$clog2(WIDTH)-1:2]] <= in[23:16];
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[31:24];
-						end
-						1: begin
-							data1[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data2[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[23:16];
-							data0[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];
-						end
-						2: begin
-							data2[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[15:8];
-							data0[addr[$clog2(WIDTH)-1:2]+1] <= in[23:16];
-							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];
-						end
-						3: begin
-							data3[addr[$clog2(WIDTH)-1:2]] <= in[7:0];
-							data0[addr[$clog2(WIDTH)-1:2]+1] <= in[15:8];
-							data1[addr[$clog2(WIDTH)-1:2]+1] <= in[23:16];
-							data2[addr[$clog2(WIDTH)-1:2]+1] <= in[31:24];
-						end
-					endcase
-				end
-
-
-
-			endcase
+			end
+			default: sign_ex = 0;
+		endcase
+	end
 
 
 endmodule
