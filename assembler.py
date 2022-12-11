@@ -57,6 +57,7 @@ def load_encoding(encoding):
     fp = open("encoding.txt", "r")
 
     for line in fp.readlines():
+        line = line.split('//', 1)[0]
         line = line.replace(",", "")
         line = line.replace("\n", "")
         line = line.split(" ")
